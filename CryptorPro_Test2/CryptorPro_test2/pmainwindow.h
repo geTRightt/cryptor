@@ -11,7 +11,6 @@
 #include <QImage>
 #include <QPixmap>
 #include <QFileInfo>
-#include <widget.h>
 #include <QString>
 
 #include <paradlg.h>
@@ -40,10 +39,12 @@ public slots:
     void SavePicSlot();
     void QuitSlot();
     void EncryptorSlot();
+signals:
+    void closeSignal();
 
 private:
     Ui::pMainWindow *ui;
-    Widget w;
+    //Widget w;
     //paraDlg *paraDialog;
     paraDlg paraDialog;
     cv::Mat image;

@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QButtonGroup>
+#include "pmainwindow.h"
 
 namespace Ui {
 class Widget;
@@ -21,6 +22,7 @@ public slots:
 
 private:
     Ui::Widget *ui;
+    pMainWindow *pic;
 
 private:
      QButtonGroup *groupButton1;

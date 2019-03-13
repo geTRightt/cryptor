@@ -1,6 +1,6 @@
 #include "widget.h"
 #include "ui_widget.h"
-#include<pmainwindow.h>
+
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -19,6 +19,7 @@ Widget::Widget(QWidget *parent) :
     this->setMaximumSize(480,272);
     this->setMinimumSize(480,272);/*similar code: resize(480,272)*/
     QObject::connect(ui->cancelButton,SIGNAL(clicked(bool)),qApp,SLOT(quit()));
+
 }
 
 Widget::~Widget()
@@ -38,9 +39,12 @@ void Widget::on_nextButton_clicked()
     case 2:
         //view=new pMainWindow(this);
         //view->show();
-        pMainWindow *pic=new pMainWindow;
+        pic=new pMainWindow(this);
+        pic->setAttribute(Qt::WA_DeleteOnClose);
         pic->show();
-        this->close();
+        this->hide();
+        QObject::connect(pic,SIGNAL(closeSignal()),this,SLOT(show()));
+        //this->close();
     //default:
        // break;
     }

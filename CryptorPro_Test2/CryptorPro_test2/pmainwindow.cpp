@@ -1,6 +1,6 @@
 #include "pmainwindow.h"
 #include "ui_pmainwindow.h"
-#include <widget.h>
+//#include <widget.h>
 
 
 pMainWindow::pMainWindow(QWidget *parent) :
@@ -97,7 +97,8 @@ void pMainWindow::SavePicSlot()
 
 void pMainWindow::QuitSlot()
 {
-    w.show();
+    //w.show();
+    emit closeSignal();
     this->close();
 }
 
@@ -111,9 +112,9 @@ void pMainWindow::EncryptorSlot()
        int y0= paraDialog.sendY0Slot();
        int z0= paraDialog.sendZ0Slot();
        int w0= paraDialog.sendW0Slot();
-       qDebug()<<x0;
-       qDebug()<<y0;
-       qDebug()<<z0;
-       qDebug()<<w0;
+       qDebug()<<"para x0 is:"<<x0;
+       qDebug()<<"para y0 is:"<<y0;
+       qDebug()<<"para z0 is:"<<z0;
+       qDebug()<<"para w0 is:"<<w0;
     }
 }
