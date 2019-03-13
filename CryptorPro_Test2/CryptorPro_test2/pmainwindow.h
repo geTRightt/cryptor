@@ -12,6 +12,16 @@
 #include <QPixmap>
 #include <QFileInfo>
 #include <widget.h>
+#include <QString>
+
+#include <paradlg.h>
+
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+
+using namespace cv;
+
 
 namespace Ui {
 class pMainWindow;
@@ -29,10 +39,14 @@ public slots:
     void OpenPicSlot();
     void SavePicSlot();
     void QuitSlot();
+    void EncryptorSlot();
 
 private:
     Ui::pMainWindow *ui;
     Widget w;
+    //paraDlg *paraDialog;
+    paraDlg paraDialog;
+    cv::Mat image;
 };
 
 #endif // PMAINWINDOW_H
