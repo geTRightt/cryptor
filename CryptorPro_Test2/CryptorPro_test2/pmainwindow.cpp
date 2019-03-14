@@ -108,13 +108,42 @@ void pMainWindow::EncryptorSlot()
     paraDlg paraDialog(this);
     if(paraDialog.exec()==QDialog::Accepted)
     {
-       int x0= paraDialog.sendX0Slot();
-       int y0= paraDialog.sendY0Slot();
-       int z0= paraDialog.sendZ0Slot();
-       int w0= paraDialog.sendW0Slot();
-       qDebug()<<"para x0 is:"<<x0;
-       qDebug()<<"para y0 is:"<<y0;
-       qDebug()<<"para z0 is:"<<z0;
-       qDebug()<<"para w0 is:"<<w0;
+
+       double x0= paraDialog.sendX0Slot();
+       double y0= paraDialog.sendY0Slot();
+       double z0= paraDialog.sendZ0Slot();
+       double w0= paraDialog.sendW0Slot();
+
+       //qDebug()<<"para x0 is:"<<x0;
+       //qDebug()<<"para y0 is:"<<y0;
+       //qDebug()<<"para z0 is:"<<z0;
+       //qDebug()<<"para w0 is:"<<w0;
+
+       unsigned char k=x0*4096;
+       k&=0x03;
+       qDebug("para x0 is:%x",k);
+       k=k<<6|1<<4|2<<2|3;
+       unsigned char i=1;
+       k^=i;
+       qDebug("key is:%d",k);
     }
+}
+
+void pMainWindow::PWGeneratorSlot(double x, double y, double z, double w)
+{
+    double t=0.01;
+    double a=-1.12;
+    double b=1;
+    double beta=15;
+    double gama=10;
+
+    double Xn=x;
+    double Yn=y;
+    double Zn=z;
+    double Wn=w;
+
+    double Xn_1=Xn+t*beta*Zn;
+    double Yn_1=Yn+t*gama*((Zn-Yn)-(a+b*Wn*Wn)*Yn);
+    double Zn_1=Zn+t*(Yn-Zn-Xn);
+    double Wn_1=Wn+t*Yn;
 }

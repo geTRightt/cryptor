@@ -38,26 +38,26 @@ void paraDlg::on_cancelButton_clicked()
     this->close();
 }
 
-int paraDlg::sendX0Slot()
+double paraDlg::sendX0Slot()
 {
-    int x0=ui->xlineEdit->text().toInt();
+    double x0=ui->xlineEdit->text().toDouble();
     return x0;
 }
 
-int paraDlg::sendY0Slot()
+double paraDlg::sendY0Slot()
 {
-    int y0=ui->ylineEdit->text().toInt();
+    double y0=ui->ylineEdit->text().toDouble();
     return y0;
 }
 
-int paraDlg::sendZ0Slot()
+double paraDlg::sendZ0Slot()
 {
-    int z0=ui->zlineEdit->text().toInt();
+    double z0=ui->zlineEdit->text().toDouble();
     return z0;
 }
 
-int paraDlg::sendW0Slot()
+double paraDlg::sendW0Slot()
 {
-    int w0=ui->wlineEdit->text().toInt();
+    double w0=ui->wlineEdit->text().toDouble();
     return w0;
 }

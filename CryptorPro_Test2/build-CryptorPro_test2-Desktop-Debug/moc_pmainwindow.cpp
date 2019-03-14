@@ -22,7 +22,7 @@ static const uint qt_meta_data_pMainWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -37,6 +37,7 @@ static const uint qt_meta_data_pMainWindow[] = {
       41,   12,   12,   12, 0x0a,
       55,   12,   12,   12, 0x0a,
       66,   12,   12,   12, 0x0a,
+      90,   82,   12,   12, 0x0a,
 
        0        // eod
 };
@@ -44,6 +45,7 @@ static const uint qt_meta_data_pMainWindow[] = {
 static const char qt_meta_stringdata_pMainWindow[] = {
     "pMainWindow\0\0closeSignal()\0OpenPicSlot()\0"
     "SavePicSlot()\0QuitSlot()\0EncryptorSlot()\0"
+    "x,y,z,w\0PWGeneratorSlot(double,double,double,double)\0"
 };
 
 void pMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -57,10 +59,10 @@ void pMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 2: _t->SavePicSlot(); break;
         case 3: _t->QuitSlot(); break;
         case 4: _t->EncryptorSlot(); break;
+        case 5: _t->PWGeneratorSlot((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4]))); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObjectExtraData pMainWindow::staticMetaObjectExtraData = {
@@ -95,9 +97,9 @@ int pMainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

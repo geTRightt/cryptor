@@ -34,7 +34,11 @@ void Widget::on_nextButton_clicked()
 
         break;
     case 1:
-
+        file=new FMainWindow(this);
+        file->setAttribute(Qt::WA_DeleteOnClose);
+        file->show();
+        this->hide();
+        QObject::connect(file,SIGNAL(closeSignal()),this,SLOT(show()));
         break;
     case 2:
         //view=new pMainWindow(this);

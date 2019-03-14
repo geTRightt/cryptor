@@ -32,17 +32,17 @@ static const uint qt_meta_data_paraDlg[] = {
  // slots: signature, parameters, type, tag, flags
        9,    8,    8,    8, 0x0a,
       36,    8,    8,    8, 0x0a,
-      66,    8,   62,    8, 0x0a,
-      79,    8,   62,    8, 0x0a,
-      92,    8,   62,    8, 0x0a,
-     105,    8,   62,    8, 0x0a,
+      69,    8,   62,    8, 0x0a,
+      82,    8,   62,    8, 0x0a,
+      95,    8,   62,    8, 0x0a,
+     108,    8,   62,    8, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_paraDlg[] = {
     "paraDlg\0\0on_confirmButton_clicked()\0"
-    "on_cancelButton_clicked()\0int\0"
+    "on_cancelButton_clicked()\0double\0"
     "sendX0Slot()\0sendY0Slot()\0sendZ0Slot()\0"
     "sendW0Slot()\0"
 };
@@ -55,14 +55,14 @@ void paraDlg::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         switch (_id) {
         case 0: _t->on_confirmButton_clicked(); break;
         case 1: _t->on_cancelButton_clicked(); break;
-        case 2: { int _r = _t->sendX0Slot();
-            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 3: { int _r = _t->sendY0Slot();
-            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 4: { int _r = _t->sendZ0Slot();
-            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
-        case 5: { int _r = _t->sendW0Slot();
-            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
+        case 2: { double _r = _t->sendX0Slot();
+            if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
+        case 3: { double _r = _t->sendY0Slot();
+            if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
+        case 4: { double _r = _t->sendZ0Slot();
+            if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
+        case 5: { double _r = _t->sendW0Slot();
+            if (_a[0]) *reinterpret_cast< double*>(_a[0]) = _r; }  break;
         default: ;
         }
     }

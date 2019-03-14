@@ -19,10 +19,10 @@ public slots:
     void on_confirmButton_clicked();
     void on_cancelButton_clicked();
 
-    int sendX0Slot();
-    int sendY0Slot();
-    int sendZ0Slot();
-    int sendW0Slot();
+    double sendX0Slot();
+    double sendY0Slot();
+    double sendZ0Slot();
+    double sendW0Slot();
 signals:
 
 

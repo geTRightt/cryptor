@@ -39,6 +39,7 @@ public slots:
     void SavePicSlot();
     void QuitSlot();
     void EncryptorSlot();
+    void PWGeneratorSlot(double x,double y,double z,double w);
 signals:
     void closeSignal();
 
