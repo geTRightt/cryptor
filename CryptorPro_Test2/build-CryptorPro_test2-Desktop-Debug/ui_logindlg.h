@@ -75,13 +75,13 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+
+        horizontalLayout_4->addLayout(horizontalLayout_2);
+
         setButton = new QPushButton(layoutWidget);
         setButton->setObjectName(QString::fromUtf8("setButton"));
 
-        horizontalLayout_2->addWidget(setButton);
-
-
-        horizontalLayout_4->addLayout(horizontalLayout_2);
+        horizontalLayout_4->addWidget(setButton);
 
         horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 

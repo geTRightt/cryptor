@@ -17,19 +17,22 @@ SOURCES += main.cpp\
     logindlg.cpp \
     pmainwindow.cpp \
     paradlg.cpp \
-    fmainwindow.cpp
+    fmainwindow.cpp \
+    setdlg.cpp
 
 HEADERS  += widget.h \
     logindlg.h \
     pmainwindow.h \
     paradlg.h \
-    fmainwindow.h
+    fmainwindow.h \
+    setdlg.h
 
 FORMS    += widget.ui \
     logindlg.ui \
     pmainwindow.ui \
     paradlg.ui \
-    fmainwindow.ui
+    fmainwindow.ui \
+    setdlg.ui
 
 INCLUDEPATH += /usr/local/include \
                /usr/local/include/opencv\

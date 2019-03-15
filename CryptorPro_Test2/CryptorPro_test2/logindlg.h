@@ -5,6 +5,10 @@
 #include <QMessageBox>
 #include <QString>
 #include <QSize>
+#include <QDebug>
+#include <QFile>
+#include <QTextStream>
+#include <setdlg.h>
 
 namespace Ui {
 class loginDlg;
@@ -20,6 +24,7 @@ public:
 
 public slots:
     void on_loginButton_clicked();
+    void on_setButton_clicked();
 
 private:
     Ui::loginDlg *ui;

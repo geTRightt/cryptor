@@ -5,6 +5,7 @@
 #include <QButtonGroup>
 #include "pmainwindow.h"
 #include "fmainwindow.h"
+#include <QApplication>
 
 namespace Ui {
 class Widget;

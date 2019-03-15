@@ -18,7 +18,6 @@ pMainWindow::pMainWindow(QWidget *parent) :
     this->setMaximumSize(480,272);
     this->setMinimumSize(480,272);/*similar code: resize(480,272)*/
 
-    //QObject::connect(ui->actionEncryption_E,SIGNAL(triggered(bool)),paraDialog,SLOT(show()));//un modal
     QObject::connect(ui->actionEncryption_E,SIGNAL(triggered(bool)),this,SLOT(EncryptorSlot()));//modal
 
     QObject::connect(ui->actionOpen_O,SIGNAL(triggered(bool)),this,SLOT(OpenPicSlot()));
@@ -68,7 +67,6 @@ void pMainWindow::OpenPicSlot()
           QMessageBox::information(this, tr("Error"), tr("Open file error"));
           return ;
       }
-
      QPixmap pixmap = QPixmap::fromImage(image);
 
      //QSize imageSize = pixmap.size();     //
@@ -123,71 +121,38 @@ void pMainWindow::EncryptorSlot()
            double y0= paraDialog.sendY0Slot();
            double z0= paraDialog.sendZ0Slot();
            double w0= paraDialog.sendW0Slot();
-
            qint64 size;
-           QByteArray filebytes;
-           QFile afile,bfile,cfile;
-           afile.setFileName(this->windowTitle());
-           if(afile.open(QIODevice::ReadOnly))
-           {
-               size = afile.bytesAvailable();
-               qDebug("size is %d bytes",size);
 
-               filebytes.resize(size);
-               filebytes = afile.readAll();
-               //p=(char *)malloc(afile.bytesAvailable());
-               //afile.read(p,afile.bytesAvailable());
-               afile.close();
-           }
+           QImage aimage;
+           if (!aimage.load(this->windowTitle()))
+           {
+                QMessageBox::information(this, tr("Error"), tr("Open file error"));
+                return ;
+            }
            else
            {
-               QMessageBox::warning(this,"Error Message!","afile Faile to open the file!");
-           }
-
-           bfile.setFileName(this->windowTitle());
-           if(bfile.open(QIODevice::ReadWrite|QIODevice::Truncate))
-           {
-               bfile.close();
-           }
-           else
-           {
-               QMessageBox::warning(this,"Error Message!","bfile Faile to open the file!");
-           }
-
-           cfile.setFileName(this->windowTitle());
-           if(cfile.open(QIODevice::ReadWrite))
-           {
-               char * p = new char[size+1];
-               this->keygeneratorSlot(p,x0,y0,z0,w0,size);
-               for(int i=0;i<size-1;i++)
+               unsigned char *pData = aimage.bits();
+              // int pos    = 0;
+               int width  = aimage.width();
+               int height = aimage.height();
+               //size       = width*height*3;
+               //char * p   = new char[size+1];
+               //this->keygeneratorSlot(p,x0,y0,z0,w0,size);
+               for(int i = 0;i<height;i++)
                {
-                   filebytes[i]=(filebytes.at(i))^p[i];
+                   for(int j = 0;j<width;j++)
+                   {
+                       *(pData+(i*width+j)*4)=0;
+                       //pos+=1;
+                       *(pData+(i*width+j)*4+1)=0;
+                       //pos+=1;
+                       *(pData+(i*width+j)*4+2)=0;
+                       //pos+=1;
+                   }
                }
-               cfile.write(filebytes);
-               delete [] p;
-
-               /*if(QPixmap pixmap = QPixmap::loadFromData(cfile))
-               {
-                   int with = ui->plabel->width();                                                           //
-                   int high =ui->plabel->height();                                                           //
-                   QPixmap fitpixmap = pixmap.scaled(with,high,Qt::KeepAspectRatio,Qt::SmoothTransformation);    //
-                   //QPixmap fitpixmap = pixmap.scaled(with,high,Qt::IgnoreAspectRatio,Qt::SmoothTransformation);//size control plan2
-                   ui->plabel->setAlignment(Qt::AlignCenter);                                                //
-                   ui->plabel->setPixmap(fitpixmap);
-               }
-               else
-               {
-                   QMessageBox::warning(this,"Error Message!","Pixmap load from data error!");
-               }*/
-
-               cfile.close();
+               //delete [] p;
            }
-           else
-           {
-               QMessageBox::warning(this,"Error Message!","cfile Faile to open the file!");
-           }
-
-
+           QPixmap cpixmap=QPixmap::fromImage(aimage);
         }
     }
 }

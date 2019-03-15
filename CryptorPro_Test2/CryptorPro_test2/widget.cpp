@@ -19,7 +19,6 @@ Widget::Widget(QWidget *parent) :
     this->setMaximumSize(480,272);
     this->setMinimumSize(480,272);/*similar code: resize(480,272)*/
     QObject::connect(ui->cancelButton,SIGNAL(clicked(bool)),qApp,SLOT(quit()));
-
 }
 
 Widget::~Widget()
