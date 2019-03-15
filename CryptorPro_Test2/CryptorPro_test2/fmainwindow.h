@@ -9,6 +9,7 @@
 #include <QTextStream>
 #include <QDir>
 #include <QBitArray>
+#include <paradlg.h>
 
 namespace Ui {
 class FMainWindow;
@@ -23,10 +24,12 @@ public:
     ~FMainWindow();
 
 public slots:
-    void quitSlot();
-    void fileOpenSlot();
-    void fileSaveSlot();
-    void cryptorSlot();
+    void   quitSlot();
+    void   fileOpenSlot();
+    void   fileSaveSlot();
+    void   cryptorSlot();
+    void   keygeneratorSlot(char * keytemp,double x0,double y0,double z0,double w0,qint64 size);
+
 
 signals:
     void closeSignal();

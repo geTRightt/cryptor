@@ -37,7 +37,7 @@ static const uint qt_meta_data_pMainWindow[] = {
       41,   12,   12,   12, 0x0a,
       55,   12,   12,   12, 0x0a,
       66,   12,   12,   12, 0x0a,
-      90,   82,   12,   12, 0x0a,
+     107,   82,   12,   12, 0x0a,
 
        0        // eod
 };
@@ -45,7 +45,8 @@ static const uint qt_meta_data_pMainWindow[] = {
 static const char qt_meta_stringdata_pMainWindow[] = {
     "pMainWindow\0\0closeSignal()\0OpenPicSlot()\0"
     "SavePicSlot()\0QuitSlot()\0EncryptorSlot()\0"
-    "x,y,z,w\0PWGeneratorSlot(double,double,double,double)\0"
+    "keytemp,x0,y0,z0,w0,size\0"
+    "keygeneratorSlot(char*,double,double,double,double,qint64)\0"
 };
 
 void pMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -59,7 +60,7 @@ void pMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 2: _t->SavePicSlot(); break;
         case 3: _t->QuitSlot(); break;
         case 4: _t->EncryptorSlot(); break;
-        case 5: _t->PWGeneratorSlot((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4]))); break;
+        case 5: _t->keygeneratorSlot((*reinterpret_cast< char*(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4])),(*reinterpret_cast< double(*)>(_a[5])),(*reinterpret_cast< qint64(*)>(_a[6]))); break;
         default: ;
         }
     }

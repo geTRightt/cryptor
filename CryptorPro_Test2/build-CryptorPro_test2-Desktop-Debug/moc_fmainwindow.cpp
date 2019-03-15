@@ -22,7 +22,7 @@ static const uint qt_meta_data_FMainWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -37,6 +37,7 @@ static const uint qt_meta_data_FMainWindow[] = {
       38,   12,   12,   12, 0x0a,
       53,   12,   12,   12, 0x0a,
       68,   12,   12,   12, 0x0a,
+     107,   82,   12,   12, 0x0a,
 
        0        // eod
 };
@@ -44,7 +45,8 @@ static const uint qt_meta_data_FMainWindow[] = {
 static const char qt_meta_stringdata_FMainWindow[] = {
     "FMainWindow\0\0closeSignal()\0quitSlot()\0"
     "fileOpenSlot()\0fileSaveSlot()\0"
-    "cryptorSlot()\0"
+    "cryptorSlot()\0keytemp,x0,y0,z0,w0,size\0"
+    "keygeneratorSlot(char*,double,double,double,double,qint64)\0"
 };
 
 void FMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -58,10 +60,10 @@ void FMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 2: _t->fileOpenSlot(); break;
         case 3: _t->fileSaveSlot(); break;
         case 4: _t->cryptorSlot(); break;
+        case 5: _t->keygeneratorSlot((*reinterpret_cast< char*(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4])),(*reinterpret_cast< double(*)>(_a[5])),(*reinterpret_cast< qint64(*)>(_a[6]))); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObjectExtraData FMainWindow::staticMetaObjectExtraData = {
@@ -96,9 +98,9 @@ int FMainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }
