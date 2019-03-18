@@ -30,7 +30,11 @@ void Widget::on_nextButton_clicked()
 {
     switch (groupButton1->checkedId()) {
     case 0:
-
+        filefolder=new filefoldermainwindow(this);
+        filefolder->setAttribute(Qt::WA_DeleteOnClose);
+        filefolder->show();
+        this->hide();
+        QObject::connect(filefolder,SIGNAL(closeSignal()),this,SLOT(show()));
         break;
     case 1:
         file=new FMainWindow(this);

@@ -5,6 +5,7 @@
 #include <QButtonGroup>
 #include "pmainwindow.h"
 #include "fmainwindow.h"
+#include "filefoldermainwindow.h"
 #include <QApplication>
 
 namespace Ui {
@@ -26,6 +27,7 @@ private:
     Ui::Widget *ui;
     pMainWindow *pic;
     FMainWindow *file;
+    filefoldermainwindow *filefolder;
 
 private:
      QButtonGroup *groupButton1;
