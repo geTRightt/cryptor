@@ -172,7 +172,7 @@ void FMainWindow::cryptorSlot()
 void FMainWindow::keygeneratorSlot(char *keytemp, double x0, double y0, double z0, double w0,qint64 sizes)
 {
     unsigned char k,k1,k2,k3,k4;
-    double t=0.01;
+    double t=0.001;
     double a=-1.12;
     double b=1;
     double beta=15;

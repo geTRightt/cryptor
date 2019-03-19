@@ -22,7 +22,7 @@ static const uint qt_meta_data_pMainWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -39,7 +39,8 @@ static const uint qt_meta_data_pMainWindow[] = {
       66,   12,   12,   12, 0x0a,
       82,   12,   12,   12, 0x0a,
      123,   98,   12,   12, 0x0a,
-     195,  189,  181,   12, 0x0a,
+     196,  190,  182,   12, 0x0a,
+     214,  190,  182,   12, 0x0a,
 
        0        // eod
 };
@@ -48,8 +49,9 @@ static const char qt_meta_stringdata_pMainWindow[] = {
     "pMainWindow\0\0closeSignal()\0OpenPicSlot()\0"
     "SavePicSlot()\0QuitSlot()\0EncryptorSlot()\0"
     "DecryptorSlot()\0keytemp,x0,y0,z0,w0,size\0"
-    "keygeneratorSlot(int*,double,double,double,double,qint64)\0"
+    "keygeneratorSlot(char*,double,double,double,double,qint64)\0"
     "QString\0title\0pickName(QString)\0"
+    "pickDir(QString)\0"
 };
 
 void pMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -64,8 +66,10 @@ void pMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 3: _t->QuitSlot(); break;
         case 4: _t->EncryptorSlot(); break;
         case 5: _t->DecryptorSlot(); break;
-        case 6: _t->keygeneratorSlot((*reinterpret_cast< int*(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4])),(*reinterpret_cast< double(*)>(_a[5])),(*reinterpret_cast< qint64(*)>(_a[6]))); break;
+        case 6: _t->keygeneratorSlot((*reinterpret_cast< char*(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4])),(*reinterpret_cast< double(*)>(_a[5])),(*reinterpret_cast< qint64(*)>(_a[6]))); break;
         case 7: { QString _r = _t->pickName((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
+        case 8: { QString _r = _t->pickDir((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
         default: ;
         }
@@ -104,9 +108,9 @@ int pMainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     }
     return _id;
 }

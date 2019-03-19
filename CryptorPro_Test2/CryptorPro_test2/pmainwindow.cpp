@@ -30,25 +30,6 @@ pMainWindow::~pMainWindow()
 
 void pMainWindow::OpenPicSlot()
 {
-    /*QT + Opencv codes*/
-    /*QString fileName=QFileDialog::getOpenFileName(this,"Open Picture",QDir::currentPath());
-     image =cv::imread(fileName.toStdString());
-
-     cv::cvtColor(image,image,CV_BGR2RGB);
-     QImage img = QImage((const unsigned char*)(image.data),image.cols,image.rows,QImage::Format_RGB888);
-     //ui->plabel->setAlignment(Qt::AlignCenter);
-     //ui->plabel->setPixmap(QPixmap::fromImage(img));
-
-
-     QPixmap pixmap = QPixmap::fromImage(img);
-     int with = ui->plabel->width();                                                           //
-     int high =ui->plabel->height();                                                           //
-     QPixmap fitpixmap = pixmap.scaled(with,high,Qt::KeepAspectRatio,Qt::SmoothTransformation);    //
-     //QPixmap fitpixmap = pixmap.scaled(with,high,Qt::IgnoreAspectRatio,Qt::SmoothTransformation);//size control plan2
-     ui->plabel->setAlignment(Qt::AlignCenter);                                                //
-     ui->plabel->setPixmap(fitpixmap);                                                        //
-    */
-
     /*Only QT lib codes*/
      QString fileName=QFileDialog::getOpenFileName(this,"Open File","/home/wj/Pictures");
      this->setWindowTitle(fileName);
@@ -128,9 +109,9 @@ void pMainWindow::EncryptorSlot()
            int nWidth = origin.width();
            int nHeight= origin.height();
            int size=nWidth*nHeight;
-           int * rBuff = new int[size];
-           int* gBuff = new int[size];
-           int * bBuff = new int[size];
+           char * rBuff = new char[size];
+           char * gBuff = new char[size];
+           char * bBuff = new char[size];
 
            this->keygeneratorSlot(rBuff,x0,y0,z0,w0,size);
            this->keygeneratorSlot(gBuff,x0,y0,z0,w0,size);
@@ -159,8 +140,14 @@ void pMainWindow::EncryptorSlot()
 
            QString Name=this->pickName(this->windowTitle());
            QString bmp=".bmp";
+           QString Ecpt="EcptBackup/";
            Name.append(bmp);
-           QString fileDir="/home/wj/Pictures/EcptBackup/";
+           QString fileDir =this->pickDir(this->windowTitle());
+           fileDir.append(Ecpt);
+           //qDebug()<<fileDir;
+           //QString fileDir="/home/wj/Pictures/EcptBackup/";
+           QDir EcptBackup;
+           EcptBackup.mkdir(fileDir);
            fileDir.append(Name);
 
            origin.save(fileDir);
@@ -231,13 +218,16 @@ void pMainWindow::DecryptorSlot()
     }
     else
     {
-        qDebug()<<this->windowTitle();
+        //qDebug()<<this->windowTitle();
         QString Name=this->pickName(this->windowTitle());
         QString bmp=".bmp";
+        QString Ecpt="EcptBackup/";
         Name.append(bmp);
-        QString fileDir="/home/wj/Pictures/EcptBackup/";
+        //QString fileDir="/home/wj/Pictures/EcptBackup/";
+        QString fileDir =this->pickDir(this->windowTitle());
+        fileDir.append(Ecpt);
+        //qDebug()<<fileDir;
         fileDir.append(Name);
-        qDebug()<<fileDir;
         paraDlg paraDialog(this);
         if(paraDialog.exec()==QDialog::Accepted)
         {
@@ -256,9 +246,9 @@ void pMainWindow::DecryptorSlot()
            int nWidth = origin.width();
            int nHeight= origin.height();
            int size=nWidth*nHeight;
-           int * rBuff = new int[size];
-           int* gBuff = new int[size];
-           int * bBuff = new int[size];
+           char * rBuff = new char[size];
+           char * gBuff = new char[size];
+           char * bBuff = new char[size];
 
            this->keygeneratorSlot(rBuff,x0,y0,z0,w0,size);
            this->keygeneratorSlot(gBuff,x0,y0,z0,w0,size);
@@ -278,7 +268,6 @@ void pMainWindow::DecryptorSlot()
                    x+=1;
                }
            }
-           //origin.save("/home/wj/Pictures/backup.bmp");
            origin.save(this->windowTitle());
            QPixmap convertPixmap = QPixmap::fromImage(origin);
 
@@ -297,9 +286,9 @@ void pMainWindow::DecryptorSlot()
 
 }
 
-void pMainWindow::keygeneratorSlot(int *keytemp, double x0, double y0, double z0, double w0,qint64 sizes)
+void pMainWindow::keygeneratorSlot(char *keytemp, double x0, double y0, double z0, double w0,qint64 sizes)
 {
-    int k,k1,k2,k3,k4;
+    char k,k1,k2,k3,k4;
     double t=0.001;
     double a=-1.12;
     double b=1;
@@ -359,7 +348,7 @@ void pMainWindow::keygeneratorSlot(int *keytemp, double x0, double y0, double z0
 
 QString pMainWindow::pickName(QString title)
 {
-    QString Name;
+    QString fileName;
     QString xiegang="/";
     QString dian =".";
     int x,y;
@@ -378,9 +367,25 @@ QString pMainWindow::pickName(QString title)
     }
     while(i!=-1);
 
-    qDebug()<<x;
-    qDebug()<<y;
+    //qDebug()<<x;
+    //qDebug()<<y;
 
-    Name=title.mid(x+1,y-x-1);
-    return Name;
+    fileName=title.mid(x+1,y-x-1);
+    return fileName;
+}
+
+QString pMainWindow::pickDir(QString title)
+{
+    QString DirName;
+    QString xiegang="/";
+    int x;
+    int i=0;
+    do
+    {
+        x=i;
+        i     = title.indexOf(xiegang,x+1);
+    }
+    while(i!=-1);
+    DirName=title.mid(0,x+1);
+    return DirName;
 }

@@ -25,9 +25,12 @@ public slots:
     void on_browseButton_clicked();
     void on_encryptButton_clicked();
     void on_decryptButton_clicked();
-    void findfileSlot(QString path,double x0,double y0,double z0,double w0);
+    void findfileEncryptSlot(QString path,double x0,double y0,double z0,double w0);
+    void findfileDecryptSlot(QString path,double x0,double y0,double z0,double w0);
     //void cryptorSlot();
     void keygeneratorSlot(char * keytemp,double x0,double y0,double z0,double w0,qint64 size);
+    QString pickName(QString title);
+    QString pickDir(QString title);
 
 signals:
     void closeSignal();

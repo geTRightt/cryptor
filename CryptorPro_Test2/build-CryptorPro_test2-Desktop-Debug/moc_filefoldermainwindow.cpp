@@ -22,7 +22,7 @@ static const uint qt_meta_data_filefoldermainwindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+      10,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -38,7 +38,10 @@ static const uint qt_meta_data_filefoldermainwindow[] = {
       88,   21,   21,   21, 0x0a,
      115,   21,   21,   21, 0x0a,
      159,  142,   21,   21, 0x0a,
-     234,  209,   21,   21, 0x0a,
+     216,  142,   21,   21, 0x0a,
+     298,  273,   21,   21, 0x0a,
+     371,  365,  357,   21, 0x0a,
+     389,  365,  357,   21, 0x0a,
 
        0        // eod
 };
@@ -49,9 +52,12 @@ static const char qt_meta_stringdata_filefoldermainwindow[] = {
     "on_browseButton_clicked()\0"
     "on_encryptButton_clicked()\0"
     "on_decryptButton_clicked()\0path,x0,y0,z0,w0\0"
-    "findfileSlot(QString,double,double,double,double)\0"
+    "findfileEncryptSlot(QString,double,double,double,double)\0"
+    "findfileDecryptSlot(QString,double,double,double,double)\0"
     "keytemp,x0,y0,z0,w0,size\0"
     "keygeneratorSlot(char*,double,double,double,double,qint64)\0"
+    "QString\0title\0pickName(QString)\0"
+    "pickDir(QString)\0"
 };
 
 void filefoldermainwindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -65,8 +71,13 @@ void filefoldermainwindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
         case 2: _t->on_browseButton_clicked(); break;
         case 3: _t->on_encryptButton_clicked(); break;
         case 4: _t->on_decryptButton_clicked(); break;
-        case 5: _t->findfileSlot((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4])),(*reinterpret_cast< double(*)>(_a[5]))); break;
-        case 6: _t->keygeneratorSlot((*reinterpret_cast< char*(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4])),(*reinterpret_cast< double(*)>(_a[5])),(*reinterpret_cast< qint64(*)>(_a[6]))); break;
+        case 5: _t->findfileEncryptSlot((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4])),(*reinterpret_cast< double(*)>(_a[5]))); break;
+        case 6: _t->findfileDecryptSlot((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4])),(*reinterpret_cast< double(*)>(_a[5]))); break;
+        case 7: _t->keygeneratorSlot((*reinterpret_cast< char*(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4])),(*reinterpret_cast< double(*)>(_a[5])),(*reinterpret_cast< qint64(*)>(_a[6]))); break;
+        case 8: { QString _r = _t->pickName((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
+        case 9: { QString _r = _t->pickDir((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
         default: ;
         }
     }
@@ -104,9 +115,9 @@ int filefoldermainwindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 10;
     }
     return _id;
 }
