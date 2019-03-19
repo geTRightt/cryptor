@@ -53,13 +53,19 @@ void filefoldermainwindow::findfileEncryptSlot(QString path,double x0,double y0,
                 QFileInfo file_info = list.at(i);
                 if(file_info.isDir())
                 {
-                    this->findfileEncryptSlot(file_info.filePath(),x0,y0,z0,w0);
-                    //qDebug()<<file_info.filePath();
+                    if(file_info.fileName()=="EcptBackup")
+                    {
+
+                    }
+                    else
+                    {
+                        this->findfileEncryptSlot(file_info.filePath(),x0,y0,z0,w0);
+                    }
                 }
                 else if((file_info.suffix()=="jpg")|(file_info.suffix()=="bmp")|(file_info.suffix()=="jpeg")|(file_info.suffix()=="png"))
                 {
                     QString file_name = file_info.absoluteFilePath();
-                    qDebug()<<"picdir:"<<file_name;
+                    //qDebug()<<"picdir:"<<file_name;
                     QImage origin;
                     if(!origin.load(file_name))
                     {
@@ -97,7 +103,7 @@ void filefoldermainwindow::findfileEncryptSlot(QString path,double x0,double y0,
                     Name.append(bmp);
                     QString fileDir =this->pickDir(file_name);
                     fileDir.append(Ecpt);
-                    qDebug()<<fileDir;
+                    //qDebug()<<fileDir;
 
                     QDir EcptBackup;
                     EcptBackup.mkdir(fileDir);
@@ -194,7 +200,7 @@ void filefoldermainwindow::findfileDecryptSlot(QString path, double x0, double y
                 {
                     if(file_info.fileName()=="EcptBackup")
                     {
-                        qDebug()<<file_info.fileName();
+                        //qDebug()<<file_info.fileName();
                         //return;
                     }
                     else
