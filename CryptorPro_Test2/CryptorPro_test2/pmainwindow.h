@@ -39,7 +39,9 @@ public slots:
     void SavePicSlot();
     void QuitSlot();
     void EncryptorSlot();
-    void   keygeneratorSlot(char * keytemp,double x0,double y0,double z0,double w0,qint64 size);
+    void DecryptorSlot();
+    void keygeneratorSlot(int * keytemp,double x0,double y0,double z0,double w0,qint64 size);
+    QString pickName(QString title);
 signals:
     void closeSignal();
 

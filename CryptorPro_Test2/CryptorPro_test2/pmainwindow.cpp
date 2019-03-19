@@ -9,16 +9,13 @@ pMainWindow::pMainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Picture Cryptor");
-
-    //paraDialog=new paraDlg();
-
-
     this->move(0,1600-272);
 
     this->setMaximumSize(480,272);
     this->setMinimumSize(480,272);/*similar code: resize(480,272)*/
 
     QObject::connect(ui->actionEncryption_E,SIGNAL(triggered(bool)),this,SLOT(EncryptorSlot()));//modal
+    QObject::connect(ui->actionDecryption_D,SIGNAL(triggered(bool)),this,SLOT(DecryptorSlot()));
 
     QObject::connect(ui->actionOpen_O,SIGNAL(triggered(bool)),this,SLOT(OpenPicSlot()));
     QObject::connect(ui->actionSave_S,SIGNAL(triggered(bool)),this,SLOT(SavePicSlot()));
@@ -121,46 +118,189 @@ void pMainWindow::EncryptorSlot()
            double y0= paraDialog.sendY0Slot();
            double z0= paraDialog.sendZ0Slot();
            double w0= paraDialog.sendW0Slot();
-           qint64 size;
 
-           QImage aimage;
-           if (!aimage.load(this->windowTitle()))
+           QImage origin;
+           if(!origin.load(this->windowTitle()))
+           {
+               QMessageBox::warning(this,"Error open picture","The piture do not exist!");
+               return;
+           }
+           int nWidth = origin.width();
+           int nHeight= origin.height();
+           int size=nWidth*nHeight;
+           int * rBuff = new int[size];
+           int* gBuff = new int[size];
+           int * bBuff = new int[size];
+
+           this->keygeneratorSlot(rBuff,x0,y0,z0,w0,size);
+           this->keygeneratorSlot(gBuff,x0,y0,z0,w0,size);
+           this->keygeneratorSlot(bBuff,x0,y0,z0,w0,size);
+
+           unsigned char *pData=origin.bits();
+           int width = origin.width();
+           int height = origin.height();
+           int x=0;
+           for(int i=0;i<height;i++)
+           {
+               for(int j=0;j<width;j++)
+               {
+                   //qDebug()<<"before:"<<*(pData+(i*width+j)*4);
+                   *(pData+(i*width+j)*4)=*(pData+(i*width+j)*4)^rBuff[x];
+                   //qDebug()<<"behind:"<<*(pData+(i*width+j)*4);
+
+                   //qDebug()<<"2before:"<<*(pData+(i*width+j)*4+1);
+                   *(pData+(i*width+j)*4+1)=*(pData+(i*width+j)*4+1)^gBuff[x];
+                   //qDebug()<<"2behind:"<<*(pData+(i*width+j)*4+1);
+
+                   *(pData+(i*width+j)*4+2)=*(pData+(i*width+j)*4+2)^bBuff[x];
+                   x+=1;
+               }
+           }
+
+           QString Name=this->pickName(this->windowTitle());
+           QString bmp=".bmp";
+           Name.append(bmp);
+           QString fileDir="/home/wj/Pictures/EcptBackup/";
+           fileDir.append(Name);
+
+           origin.save(fileDir);
+           origin.save(this->windowTitle());
+           QPixmap convertPixmap = QPixmap::fromImage(origin);
+
+           int with = ui->plabel->width();
+           int high =ui->plabel->height();
+           QPixmap fitPixmap = convertPixmap.scaled(with,high,Qt::KeepAspectRatio,Qt::SmoothTransformation);
+           ui->plabel->setAlignment(Qt::AlignCenter);
+           ui->plabel->setPixmap(fitPixmap);
+           delete [] rBuff;
+           delete [] gBuff;
+           delete [] bBuff;
+
+           //QImage *newImage = new QImage(nWidth,nHeight,QImage::Format_RGB888);
+           /*QColor oldColor;
+           int r,g,b;
+           int i=0;
+           for(int x=0;x<nWidth;x++)
+           {
+               for(int y=0;y<nHeight;y++)
+               {
+                   oldColor=QColor(origin.pixel(x,y));
+                   //r=oldColor.red();
+                   //qDebug()<<"%d"<<r;
+                   r=oldColor.red()^rBuff[i];
+                   //g=oldColor.green();
+                   g=oldColor.green()^gBuff[i];
+                   //b=oldColor.blue();
+                   b=oldColor.blue()^bBuff[i];
+                   i+=1;
+
+                   newImage->setPixel(x,y,qRgb(r,g,b));
+               }
+             }
+           qDebug("i=%d",i);
+           newImage->save("/home/wj/Pictures/3.jpg");
+           QString newPic="/home/wj/Pictures/3.jpg";
+           this->setWindowTitle(newPic);
+           //delete [] rBuff;
+           //delete [] gBuff;
+           //delete [] bBuff;
+           delete newImage;
+           QImage newimage;
+           if (!newimage.load(newPic))
            {
                 QMessageBox::information(this, tr("Error"), tr("Open file error"));
                 return ;
             }
-           else
-           {
-               unsigned char *pData = aimage.bits();
-              // int pos    = 0;
-               int width  = aimage.width();
-               int height = aimage.height();
-               //size       = width*height*3;
-               //char * p   = new char[size+1];
-               //this->keygeneratorSlot(p,x0,y0,z0,w0,size);
-               for(int i = 0;i<height;i++)
-               {
-                   for(int j = 0;j<width;j++)
-                   {
-                       *(pData+(i*width+j)*4)=0;
-                       //pos+=1;
-                       *(pData+(i*width+j)*4+1)=0;
-                       //pos+=1;
-                       *(pData+(i*width+j)*4+2)=0;
-                       //pos+=1;
-                   }
-               }
-               //delete [] p;
-           }
-           QPixmap cpixmap=QPixmap::fromImage(aimage);
+           QPixmap pixmap = QPixmap::fromImage(newimage);
+           int with = ui->plabel->width();
+           int high =ui->plabel->height();
+           QPixmap fitpixmap = pixmap.scaled(with,high,Qt::KeepAspectRatio,Qt::SmoothTransformation);
+           ui->plabel->setAlignment(Qt::AlignCenter);                                                //
+           ui->plabel->setPixmap(fitpixmap);*/
         }
     }
+
 }
 
-void pMainWindow::keygeneratorSlot(char *keytemp, double x0, double y0, double z0, double w0,qint64 sizes)
+void pMainWindow::DecryptorSlot()
 {
-    unsigned char k,k1,k2,k3,k4;
-    double t=0.01;
+    QString title="Picture Cryptor";
+    if(this->windowTitle()==title)
+    {
+        QMessageBox::warning(this,"Error Message!","Please open a Encrypted picture!");
+    }
+    else
+    {
+        qDebug()<<this->windowTitle();
+        QString Name=this->pickName(this->windowTitle());
+        QString bmp=".bmp";
+        Name.append(bmp);
+        QString fileDir="/home/wj/Pictures/EcptBackup/";
+        fileDir.append(Name);
+        qDebug()<<fileDir;
+        paraDlg paraDialog(this);
+        if(paraDialog.exec()==QDialog::Accepted)
+        {
+
+           double x0= paraDialog.sendX0Slot();
+           double y0= paraDialog.sendY0Slot();
+           double z0= paraDialog.sendZ0Slot();
+           double w0= paraDialog.sendW0Slot();
+
+           QImage origin;
+           if(!origin.load(fileDir))
+           {
+               QMessageBox::warning(this,"Error open picture","The backup picture do no exist!");
+               return;
+           }
+           int nWidth = origin.width();
+           int nHeight= origin.height();
+           int size=nWidth*nHeight;
+           int * rBuff = new int[size];
+           int* gBuff = new int[size];
+           int * bBuff = new int[size];
+
+           this->keygeneratorSlot(rBuff,x0,y0,z0,w0,size);
+           this->keygeneratorSlot(gBuff,x0,y0,z0,w0,size);
+           this->keygeneratorSlot(bBuff,x0,y0,z0,w0,size);
+
+           unsigned char *pData=origin.bits();
+           int width = origin.width();
+           int height = origin.height();
+           int x=0;
+           for(int i=0;i<height;i++)
+           {
+               for(int j=0;j<width;j++)
+               {
+                   *(pData+(i*width+j)*4)=*(pData+(i*width+j)*4)^rBuff[x];
+                   *(pData+(i*width+j)*4+1)=*(pData+(i*width+j)*4+1)^gBuff[x];
+                   *(pData+(i*width+j)*4+2)=*(pData+(i*width+j)*4+2)^bBuff[x];
+                   x+=1;
+               }
+           }
+           //origin.save("/home/wj/Pictures/backup.bmp");
+           origin.save(this->windowTitle());
+           QPixmap convertPixmap = QPixmap::fromImage(origin);
+
+           int with = ui->plabel->width();
+           int high =ui->plabel->height();
+           QPixmap fitPixmap = convertPixmap.scaled(with,high,Qt::KeepAspectRatio,Qt::SmoothTransformation);
+           ui->plabel->setAlignment(Qt::AlignCenter);
+           ui->plabel->setPixmap(fitPixmap);
+           delete [] rBuff;
+           delete [] gBuff;
+           delete [] bBuff;
+
+
+        }
+    }
+
+}
+
+void pMainWindow::keygeneratorSlot(int *keytemp, double x0, double y0, double z0, double w0,qint64 sizes)
+{
+    int k,k1,k2,k3,k4;
+    double t=0.001;
     double a=-1.12;
     double b=1;
     double beta=15;
@@ -187,8 +327,8 @@ void pMainWindow::keygeneratorSlot(char *keytemp, double x0, double y0, double z
         Zn=Zn_1;
         Wn=Wn_1;
     }
-
-    for(int i=0;i<sizes;i++)
+    int i = 0;
+    for(i=0;i<sizes;i++)
     {
         Xn_1=Xn+t*beta*Zn;
         Yn_1=Yn+t*gama*((Zn-Yn)-(a+b*Wn*Wn)*Yn);
@@ -207,11 +347,40 @@ void pMainWindow::keygeneratorSlot(char *keytemp, double x0, double y0, double z
 
         k=k1<<6|k2<<4|k3<<2|k4;
         keytemp[i]=k;
+        //qDebug()<<"k=%d"<<k;
 
         Xn=Xn_1;
         Yn=Yn_1;
         Zn=Zn_1;
         Wn=Wn_1;
     }
-    //return keytemp;
+    //qDebug()<<"ki=%d"<<i;
+}
+
+QString pMainWindow::pickName(QString title)
+{
+    QString Name;
+    QString xiegang="/";
+    QString dian =".";
+    int x,y;
+    int i=0;
+    do
+    {
+        x=i;
+        i     = title.indexOf(xiegang,x+1);
+    }
+    while(i!=-1);
+    i=0;
+    do
+    {
+        y=i;
+        i     = title.indexOf(dian,y+1);
+    }
+    while(i!=-1);
+
+    qDebug()<<x;
+    qDebug()<<y;
+
+    Name=title.mid(x+1,y-x-1);
+    return Name;
 }
