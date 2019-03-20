@@ -113,7 +113,7 @@ void FMainWindow::cryptorSlot()
             if(afile.open(QIODevice::ReadOnly))
             {
                 size = afile.bytesAvailable();
-                qDebug("size is %d bytes",size);
+                //qDebug("size is %d bytes",size);
 
                 filebytes.resize(size);
                 filebytes = afile.readAll();

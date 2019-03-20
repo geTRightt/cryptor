@@ -20,7 +20,13 @@ loginDlg::~loginDlg()
 
 void loginDlg::on_loginButton_clicked()
 {
-    QFile file("/home/wj/MyProject/Qt_cryptor/CryptorPro_Test2/usr_and_passwd");
+    QString upDir;
+    upDir=QDir::currentPath();
+    upDir.append("/usr_and_passwd");
+    QFile file(upDir);
+    //qDebug()<<upDir;
+    //QFile file("/home/wj/MyProject/Qt_cryptor/CryptorPro_Test2/usr_and_passwd");
+
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         //QMessageBox::warning(this,"failed open","failed open!");
@@ -74,8 +80,11 @@ void loginDlg::on_setButton_clicked()
         newline.append(paws);
         newline.append(wh);
         //qDebug()<<newline;
-
-        QFile file("/home/wj/MyProject/Qt_cryptor/CryptorPro_Test2/usr_and_passwd");
+        QString upDir;
+        upDir=QDir::currentPath();
+        upDir.append("/usr_and_passwd");
+        QFile file(upDir);
+        //QFile file("/home/wj/MyProject/Qt_cryptor/CryptorPro_Test2/usr_and_passwd");
         if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
         {
             //QMessageBox::warning(this,"failed open","failed open!");

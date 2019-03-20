@@ -15,7 +15,13 @@ setDlg::~setDlg()
 
 void setDlg::on_confirmButton_clicked()
 {
-    QFile file("/home/wj/MyProject/Qt_cryptor/CryptorPro_Test2/usr_and_passwd");
+    QString upDir;
+    upDir=QDir::currentPath();
+    upDir.append("/usr_and_passwd");
+    QFile file(upDir);
+    //qDebug()<<upDir;
+
+    //QFile file("/home/wj/MyProject/Qt_cryptor/CryptorPro_Test2/usr_and_passwd");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         //QMessageBox::warning(this,"failed open","failed open!");

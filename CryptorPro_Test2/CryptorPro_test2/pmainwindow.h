@@ -15,11 +15,11 @@
 
 #include <paradlg.h>
 
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
+//#include <opencv2/core/core.hpp>
+//#include <opencv2/highgui/highgui.hpp>
+//#include <opencv2/imgproc/imgproc.hpp>
 
-using namespace cv;
+//using namespace cv;
 
 
 namespace Ui {
@@ -51,7 +51,7 @@ private:
     //Widget w;
     //paraDlg *paraDialog;
     paraDlg paraDialog;
-    cv::Mat image;
+    //cv::Mat image;
 };
 
 #endif // PMAINWINDOW_H

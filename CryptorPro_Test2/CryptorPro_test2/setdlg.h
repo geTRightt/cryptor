@@ -7,6 +7,7 @@
 #include <QMessageBox>
 #include <QTextStream>
 #include <QDebug>
+#include <QDir>
 
 namespace Ui {
 class setDlg;
